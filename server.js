@@ -12,40 +12,77 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// CORS configuration - Allow your xmit.co domain
-const corsOptions = {
-    origin: [
+// ===== LOGGING =====
+console.log('🚀 XmitScript Server Starting...');
+console.log(`📡 PORT: ${PORT}`);
+console.log(`📁 Directory: ${__dirname}`);
+console.log(`🌐 NODE_ENV: ${process.env.NODE_ENV || 'development'}`);
+
+// ===== CORS CONFIGURATION - FIXED =====
+// This allows your xmit.co domain to access the API
+app.use((req, res, next) => {
+    // Allow all origins for testing (you can restrict to specific domains later)
+    const allowedOrigins = [
         'https://scripthub.xmit.dev',
         'http://localhost:3000',
-        'https://*.xmit.dev'
-    ],
-    credentials: true,
-    optionsSuccessStatus: 200
-};
+        'http://localhost:5500',
+        'https://*.xmit.dev',
+        '*'
+    ];
+    
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+        res.header('Access-Control-Allow-Origin', origin || '*');
+    }
+    
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    
+    // Handle preflight requests
+    if (req.method === 'OPTIONS') {
+        console.log('🔄 OPTIONS request received for:', req.path);
+        res.sendStatus(200);
+    } else {
+        next();
+    }
+});
 
-app.use(cors(corsOptions));
+// Additional CORS using the cors package
+app.use(cors({
+    origin: ['https://scripthub.xmit.dev', 'http://localhost:3000', 'http://localhost:5500', 'https://*.xmit.dev', '*'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
+}));
+
+// ===== MIDDLEWARE =====
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Rate limiting
+// ===== RATE LIMITING =====
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 100
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 1000, // Allow more requests for testing
+    message: { error: 'Too many requests, please try again later.' }
 });
 app.use('/api/', limiter);
 
+// ===== DATABASE SETUP =====
 // Ensure database directory exists
 const dbDir = path.join(__dirname, 'database');
 if (!fs.existsSync(dbDir)) {
     fs.mkdirSync(dbDir, { recursive: true });
+    console.log('📁 Created database directory');
 }
 
 // Initialize database
 const dbPath = path.join(dbDir, 'xmithub.db');
 const db = new Database(dbPath);
 db.pragma('journal_mode = WAL');
+console.log(`🗄️ Database: ${dbPath}`);
 
-// Initialize tables
+// ===== DATABASE INITIALIZATION =====
 const initDb = () => {
     const createTables = `
         CREATE TABLE IF NOT EXISTS scripts (
@@ -92,17 +129,23 @@ const initDb = () => {
     `;
     
     db.exec(createTables);
+    console.log('✅ Tables created/verified');
 
     // Create default admin
+    const adminUser = process.env.ADMIN_USERNAME || 'admin';
+    const adminPass = process.env.ADMIN_PASSWORD || 'SecurePassword123!';
+    
     const adminCheck = db.prepare('SELECT * FROM admin_users WHERE username = ?');
-    const adminExists = adminCheck.get(process.env.ADMIN_USERNAME || 'admin');
+    const adminExists = adminCheck.get(adminUser);
     
     if (!adminExists) {
         const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(process.env.ADMIN_PASSWORD || 'SecurePassword123!', salt);
+        const hash = bcrypt.hashSync(adminPass, salt);
         const insert = db.prepare('INSERT INTO admin_users (username, password_hash) VALUES (?, ?)');
-        insert.run(process.env.ADMIN_USERNAME || 'admin', hash);
-        console.log('✅ Default admin user created');
+        insert.run(adminUser, hash);
+        console.log(`✅ Default admin user created: ${adminUser}`);
+    } else {
+        console.log('✅ Admin user already exists');
     }
     
     console.log('✅ Database initialized');
@@ -110,7 +153,7 @@ const initDb = () => {
 
 initDb();
 
-// Auth middleware
+// ===== AUTH MIDDLEWARE =====
 const authenticateAdmin = (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
@@ -128,9 +171,21 @@ const authenticateAdmin = (req, res, next) => {
 
 // ===================== PUBLIC ENDPOINTS =====================
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.json({
+        status: 'healthy',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
+        memory: process.memoryUsage(),
+        version: '1.0.0'
+    });
+});
+
 // Get scripts by category
 app.get('/api/scripts', (req, res) => {
     try {
+        console.log('📡 GET /api/scripts - Category:', req.query.category || 'all');
         const { category } = req.query;
         let query = 'SELECT id, title, description, category, image_url, display_likes, display_downloads FROM scripts';
         let params = [];
@@ -144,9 +199,10 @@ app.get('/api/scripts', (req, res) => {
         
         const stmt = db.prepare(query);
         const scripts = stmt.all(...params);
+        console.log(`✅ Found ${scripts.length} scripts`);
         res.json(scripts);
     } catch (error) {
-        console.error('Error fetching scripts:', error);
+        console.error('❌ Error fetching scripts:', error);
         res.status(500).json({ error: 'Failed to fetch scripts' });
     }
 });
@@ -154,6 +210,7 @@ app.get('/api/scripts', (req, res) => {
 // Get single script
 app.get('/api/scripts/:id', (req, res) => {
     try {
+        console.log(`📡 GET /api/scripts/${req.params.id}`);
         const stmt = db.prepare('SELECT * FROM scripts WHERE id = ?');
         const script = stmt.get(req.params.id);
         
@@ -163,7 +220,7 @@ app.get('/api/scripts/:id', (req, res) => {
         
         res.json(script);
     } catch (error) {
-        console.error('Error fetching script:', error);
+        console.error('❌ Error fetching script:', error);
         res.status(500).json({ error: 'Failed to fetch script' });
     }
 });
@@ -171,6 +228,7 @@ app.get('/api/scripts/:id', (req, res) => {
 // Get loadstring by ID
 app.get('/api/loadstrings/:id', (req, res) => {
     try {
+        console.log(`📡 GET /api/loadstrings/${req.params.id}`);
         const { id } = req.params;
         
         const stmt = db.prepare(`
@@ -202,7 +260,7 @@ app.get('/api/loadstrings/:id', (req, res) => {
             expires_at: loadstring.expires_at
         });
     } catch (error) {
-        console.error('Error fetching loadstring:', error);
+        console.error('❌ Error fetching loadstring:', error);
         res.status(500).json({ error: 'Failed to fetch loadstring' });
     }
 });
@@ -210,6 +268,7 @@ app.get('/api/loadstrings/:id', (req, res) => {
 // Generate loadstring
 app.post('/api/generate-loadstring', (req, res) => {
     try {
+        console.log('📡 POST /api/generate-loadstring');
         const { script_id, key_token } = req.body;
         
         if (!script_id || !key_token) {
@@ -254,7 +313,7 @@ app.post('/api/generate-loadstring', (req, res) => {
         const updateKey = db.prepare('UPDATE redeemed_keys SET is_used = 1 WHERE key_token = ?');
         updateKey.run(key_token);
         
-        const baseUrl = process.env.BASE_URL || `https://xmithub-api.onrender.com`;
+        const baseUrl = process.env.BASE_URL || 'https://xmitscript-server.onrender.com';
         
         res.json({
             success: true,
@@ -276,7 +335,7 @@ end
             expires_at: expiresAt.toISOString()
         });
     } catch (error) {
-        console.error('Error generating loadstring:', error);
+        console.error('❌ Error generating loadstring:', error);
         res.status(500).json({ error: 'Failed to generate loadstring' });
     }
 });
@@ -284,6 +343,7 @@ end
 // Redeem work.ink key
 app.post('/api/redeem-key', (req, res) => {
     try {
+        console.log('📡 POST /api/redeem-key');
         const { workink_key, script_id } = req.body;
         
         if (!workink_key) {
@@ -320,7 +380,7 @@ app.post('/api/redeem-key', (req, res) => {
             message: 'Key redeemed successfully'
         });
     } catch (error) {
-        console.error('Error redeeming key:', error);
+        console.error('❌ Error redeeming key:', error);
         res.status(500).json({ error: 'Failed to redeem key' });
     }
 });
@@ -330,17 +390,20 @@ app.post('/api/redeem-key', (req, res) => {
 // Admin login
 app.post('/api/admin/login', (req, res) => {
     try {
+        console.log('📡 POST /api/admin/login - Username:', req.body.username);
         const { username, password } = req.body;
         
         const stmt = db.prepare('SELECT * FROM admin_users WHERE username = ?');
         const user = stmt.get(username);
         
         if (!user) {
+            console.log('❌ User not found:', username);
             return res.status(401).json({ error: 'Invalid credentials' });
         }
         
         const isValid = bcrypt.compareSync(password, user.password_hash);
         if (!isValid) {
+            console.log('❌ Invalid password for:', username);
             return res.status(401).json({ error: 'Invalid credentials' });
         }
         
@@ -350,9 +413,10 @@ app.post('/api/admin/login', (req, res) => {
             { expiresIn: '24h' }
         );
         
+        console.log('✅ Login successful:', username);
         res.json({ token, username: user.username });
     } catch (error) {
-        console.error('Error during login:', error);
+        console.error('❌ Error during login:', error);
         res.status(500).json({ error: 'Login failed' });
     }
 });
@@ -360,11 +424,13 @@ app.post('/api/admin/login', (req, res) => {
 // Get all scripts (admin)
 app.get('/api/admin/scripts', authenticateAdmin, (req, res) => {
     try {
+        console.log('📡 GET /api/admin/scripts - Admin:', req.admin.username);
         const stmt = db.prepare('SELECT * FROM scripts ORDER BY created_at DESC');
         const scripts = stmt.all();
+        console.log(`✅ Found ${scripts.length} scripts`);
         res.json(scripts);
     } catch (error) {
-        console.error('Error fetching admin scripts:', error);
+        console.error('❌ Error fetching admin scripts:', error);
         res.status(500).json({ error: 'Failed to fetch scripts' });
     }
 });
@@ -372,6 +438,7 @@ app.get('/api/admin/scripts', authenticateAdmin, (req, res) => {
 // Create script (admin)
 app.post('/api/admin/scripts', authenticateAdmin, (req, res) => {
     try {
+        console.log('📡 POST /api/admin/scripts - Admin:', req.admin.username);
         const { title, description, category, image_url, actual_loadstring, display_likes, display_downloads } = req.body;
         
         if (!title || !category || !actual_loadstring) {
@@ -400,9 +467,10 @@ app.post('/api/admin/scripts', authenticateAdmin, (req, res) => {
         const getStmt = db.prepare('SELECT * FROM scripts WHERE id = ?');
         const script = getStmt.get(result.lastInsertRowid);
         
+        console.log('✅ Script created:', script.title);
         res.json({ success: true, script });
     } catch (error) {
-        console.error('Error creating script:', error);
+        console.error('❌ Error creating script:', error);
         res.status(500).json({ error: 'Failed to create script' });
     }
 });
@@ -410,6 +478,7 @@ app.post('/api/admin/scripts', authenticateAdmin, (req, res) => {
 // Update script (admin)
 app.put('/api/admin/scripts/:id', authenticateAdmin, (req, res) => {
     try {
+        console.log(`📡 PUT /api/admin/scripts/${req.params.id} - Admin:`, req.admin.username);
         const { id } = req.params;
         const { title, description, category, image_url, actual_loadstring, display_likes, display_downloads } = req.body;
         
@@ -442,9 +511,10 @@ app.put('/api/admin/scripts/:id', authenticateAdmin, (req, res) => {
         const getStmt = db.prepare('SELECT * FROM scripts WHERE id = ?');
         const script = getStmt.get(id);
         
+        console.log('✅ Script updated:', script.title);
         res.json({ success: true, script });
     } catch (error) {
-        console.error('Error updating script:', error);
+        console.error('❌ Error updating script:', error);
         res.status(500).json({ error: 'Failed to update script' });
     }
 });
@@ -452,6 +522,7 @@ app.put('/api/admin/scripts/:id', authenticateAdmin, (req, res) => {
 // Delete script (admin)
 app.delete('/api/admin/scripts/:id', authenticateAdmin, (req, res) => {
     try {
+        console.log(`📡 DELETE /api/admin/scripts/${req.params.id} - Admin:`, req.admin.username);
         const { id } = req.params;
         
         const deleteLoadstrings = db.prepare('DELETE FROM loadstrings WHERE script_id = ?');
@@ -464,26 +535,62 @@ app.delete('/api/admin/scripts/:id', authenticateAdmin, (req, res) => {
             return res.status(404).json({ error: 'Script not found' });
         }
         
+        console.log('✅ Script deleted:', id);
         res.json({ success: true });
     } catch (error) {
-        console.error('Error deleting script:', error);
+        console.error('❌ Error deleting script:', error);
         res.status(500).json({ error: 'Failed to delete script' });
     }
 });
 
-// Health check
-app.get('/health', (req, res) => {
-    res.json({
-        status: 'healthy',
-        timestamp: new Date().toISOString(),
-        uptime: process.uptime()
+// ===================== 404 HANDLER =====================
+app.use((req, res) => {
+    console.log(`❌ 404 Not Found: ${req.method} ${req.url}`);
+    res.status(404).json({ error: 'Not found' });
+});
+
+// ===================== ERROR HANDLER =====================
+app.use((err, req, res, next) => {
+    console.error('❌ Unhandled error:', err);
+    res.status(500).json({ 
+        error: 'Internal server error',
+        message: process.env.NODE_ENV === 'development' ? err.message : undefined
     });
 });
 
-// Start server
+// ===================== START SERVER =====================
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 XmitScript Hub API running on port ${PORT}`);
-    console.log(`🌐 Health check: http://localhost:${PORT}/health`);
+    console.log(`
+╔═══════════════════════════════════════════════════════════╗
+║                                                           ║
+║     🚀 XmitScript Server Started Successfully            ║
+║                                                           ║
+╠═══════════════════════════════════════════════════════════╣
+║                                                           ║
+║  🌐 URL: https://xmitscript-server.onrender.com          ║
+║  📡 Port: ${PORT}                                              ║
+║  📊 Status: Running                                      ║
+║  🗄️  Database: SQLite                                    ║
+║                                                           ║
+╠═══════════════════════════════════════════════════════════╣
+║                                                           ║
+║  ✅ Health Check: /health                                ║
+║  📚 API Endpoints: /api/*                               ║
+║  🔐 Admin Login: /api/admin/login                       ║
+║                                                           ║
+╚═══════════════════════════════════════════════════════════╝
+    `);
+});
+
+// ===== GRACEFUL SHUTDOWN =====
+process.on('SIGTERM', () => {
+    console.log('🛑 SIGTERM received, closing server...');
+    process.exit(0);
+});
+
+process.on('SIGINT', () => {
+    console.log('🛑 SIGINT received, closing server...');
+    process.exit(0);
 });
 
 module.exports = app;
