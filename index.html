@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XmitScript Hub - Home</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <style>
+        /* Copy the same CSS from index.html you had before - I'll keep it simple here */
+        *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;min-height:100vh;overflow-x:hidden}.container{max-width:1200px;margin:0 auto;padding:20px}::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:#0a0a0f}::-webkit-scrollbar-thumb{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:10px}.navbar{padding:20px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(102,126,234,0.2);position:fixed;top:0;left:0;right:0;background:rgba(10,10,15,0.95);backdrop-filter:blur(10px);z-index:1000;transition:all .3s}.navbar.scrolled{padding:12px 0;box-shadow:0 4px 30px rgba(0,0,0,0.5)}.navbar .container{display:flex;justify-content:space-between;align-items:center;width:100%}.logo{font-size:28px;font-weight:700;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;animation:pulseGlow 2s infinite}@keyframes pulseGlow{0%,100%{filter:drop-shadow(0 0 10px rgba(102,126,234,0.3))}50%{filter:drop-shadow(0 0 20px rgba(102,126,234,0.6))}}.nav-links{display:flex;gap:16px}.nav-btn{padding:10px 24px;border:2px solid rgba(102,126,234,0.3);border-radius:25px;background:transparent;color:#a0a0b8;cursor:pointer;transition:all .3s;font-size:14px;font-weight:600;text-decoration:none;display:inline-block;position:relative;overflow:hidden}.nav-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(102,126,234,0.1),transparent);transition:left .5s}.nav-btn:hover::before{left:100%}.nav-btn:hover{border-color:#667eea;color:#fff;transform:translateY(-2px);box-shadow:0 4px 20px rgba(102,126,234,0.3)}.nav-btn.primary{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-color:transparent;color:#fff}.nav-btn.primary:hover{box-shadow:0 4px 30px rgba(102,126,234,0.5);transform:translateY(-2px)}.hero{padding:120px 0 80px;text-align:center;position:relative;overflow:hidden;min-height:100vh;display:flex;align-items:center;justify-content:center}.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 50%,rgba(102,126,234,0.05) 0%,transparent 50%),radial-gradient(circle at 70% 50%,rgba(118,75,162,0.05) 0%,transparent 50%);animation:rotateBackground 20s linear infinite}@keyframes rotateBackground{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}.hero-content{position:relative;z-index:1}.hero h1{font-size:72px;font-weight:800;margin-bottom:20px;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fadeInUp 1s ease-out}@keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}.hero p{font-size:22px;color:#a0a0b8;max-width:700px;margin:0 auto 40px;line-height:1.8;animation:fadeInUp 1s ease-out .2s both}.hero-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fadeInUp 1s ease-out .4s both}.hero-btn{padding:16px 48px;border-radius:30px;font-size:18px;font-weight:600;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block;position:relative;overflow:hidden}.hero-btn.primary{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border:none;color:#fff}.hero-btn.primary:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 8px 30px rgba(102,126,234,0.4)}.hero-btn.secondary{background:transparent;border:2px solid rgba(102,126,234,0.4);color:#e0e0e0}.hero-btn.secondary:hover{border-color:#667eea;transform:translateY(-3px) scale(1.05);box-shadow:0 8px 30px rgba(102,126,234,0.2)}.scroll-indicator{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);animation:bounce 2s infinite;cursor:pointer;color:#667eea;font-size:32px;z-index:1}@keyframes bounce{0%,20%,50%,80%,100%{transform:translateX(-50%) translateY(0)}40%{transform:translateX(-50%) translateY(-20px)}60%{transform:translateX(-50%) translateY(-10px)}}.stats-section{padding:40px 0 80px;background:linear-gradient(180deg,transparent 0%,rgba(26,26,46,0.5) 100%)}.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px}.stat-item{text-align:center;padding:30px;background:rgba(26,26,46,0.6);backdrop-filter:blur(10px);border-radius:16px;border:1px solid rgba(102,126,234,0.1);transition:all .3s;opacity:0;transform:translateY(30px)}.stat-item.visible{opacity:1;transform:translateY(0);transition:all .6s ease-out}.stat-item:hover{transform:translateY(-5px) scale(1.02);border-color:rgba(102,126,234,0.3);box-shadow:0 8px 30px rgba(0,0,0,0.3)}.stat-number{font-size:48px;font-weight:700;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.stat-label{color:#a0a0b8;font-size:16px;margin-top:8px}.features-section{padding:80px 0;background:linear-gradient(180deg,rgba(26,26,46,0.3) 0%,transparent 100%)}.section-title{text-align:center;font-size:40px;font-weight:700;margin-bottom:16px;color:#fff}.section-subtitle{text-align:center;color:#a0a0b8;font-size:18px;margin-bottom:50px}.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px}.feature-card{background:rgba(26,26,46,0.6);backdrop-filter:blur(10px);border:1px solid rgba(102,126,234,0.1);border-radius:16px;padding:35px;text-align:center;transition:all .4s;opacity:0;transform:translateY(30px)}.feature-card.visible{opacity:1;transform:translateY(0);transition:all .6s ease-out}.feature-card:hover{transform:translateY(-8px) scale(1.02);border-color:rgba(102,126,234,0.3);box-shadow:0 12px 40px rgba(102,126,234,0.15)}.feature-icon{font-size:56px;margin-bottom:16px;display:inline-block;animation:float 3s ease-in-out infinite}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}.feature-card h3{font-size:22px;margin-bottom:12px;color:#fff}.feature-card p{color:#a0a0b8;font-size:15px;line-height:1.7}.how-it-works{padding:80px 0;background:linear-gradient(180deg,transparent 0%,rgba(26,26,46,0.3) 100%)}.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;margin-top:40px}.step{text-align:center;padding:30px;position:relative;opacity:0;transform:translateY(30px)}.step.visible{opacity:1;transform:translateY(0);transition:all .6s ease-out}.step-number{width:60px;height:60px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#fff;margin:0 auto 16px}.step h3{font-size:20px;margin-bottom:10px;color:#fff}.step p{color:#a0a0b8;font-size:15px;line-height:1.6}.testimonials-section{padding:80px 0;background:linear-gradient(180deg,rgba(26,26,46,0.3) 0%,transparent 100%)}.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;margin-top:40px}.testimonial-card{background:rgba(26,26,46,0.6);backdrop-filter:blur(10px);border:1px solid rgba(102,126,234,0.1);border-radius:16px;padding:30px;transition:all .3s;opacity:0;transform:scale(0.95)}.testimonial-card.visible{opacity:1;transform:scale(1);transition:all .6s ease-out}.testimonial-card:hover{transform:scale(1.02);border-color:rgba(102,126,234,0.3)}.testimonial-text{color:#c0c0d0;font-size:16px;line-height:1.8;font-style:italic}.testimonial-author{margin-top:16px;color:#fff;font-weight:600}.testimonial-role{color:#667eea;font-size:14px}.cta-section{padding:80px 0;background:linear-gradient(135deg,rgba(102,126,234,0.1) 0%,rgba(118,75,162,0.1) 100%);text-align:center;border-top:1px solid rgba(102,126,234,0.1);border-bottom:1px solid rgba(102,126,234,0.1)}.cta-section h2{font-size:40px;margin-bottom:16px;color:#fff}.cta-section p{color:#a0a0b8;font-size:18px;max-width:600px;margin:0 auto 30px}.footer{text-align:center;padding:40px 0;border-top:1px solid rgba(102,126,234,0.1);color:#6a6a82;font-size:14px}.footer a{color:#667eea;text-decoration:none;transition:color .3s}.footer a:hover{color:#8a9cf5}.footer-socials{display:flex;gap:20px;justify-content:center;margin-bottom:20px}.footer-socials a{font-size:24px;transition:transform .3s;display:inline-block}.footer-socials a:hover{transform:translateY(-3px) scale(1.1)}@media(max-width:768px){.hero h1{font-size:36px}.hero p{font-size:16px;padding:0 20px}.navbar .container{flex-direction:column;gap:12px}.nav-links{flex-wrap:wrap;justify-content:center}.section-title{font-size:28px}.steps{grid-template-columns:1fr}.stat-number{font-size:32px}.hero-btn{padding:14px 32px;font-size:16px;width:100%}.hero-buttons{flex-direction:column;align-items:center;width:100%;max-width:300px;margin:0 auto}.cta-section h2{font-size:28px}}
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="/" class="logo">⚡ XmitScript Hub</a>
+            <div class="nav-links">
+                <a href="/hub" class="nav-btn">Script Hub</a>
+                <a href="/get-key" class="nav-btn primary">Get Key</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Welcome to XmitScript Hub</h1>
+            <p>The ultimate destination for Roblox script sharing. Discover, share, and execute scripts for your favorite games in a secure and community-driven environment.</p>
+            <div class="hero-buttons">
+                <a href="/hub" class="hero-btn primary">🚀 Browse Scripts</a>
+                <a href="/get-key" class="hero-btn secondary">🔑 Get Access Key</a>
+            </div>
+        </div>
+        <div class="scroll-indicator" onclick="document.getElementById('stats').scrollIntoView({behavior:'smooth'})">↓</div>
+    </section>
+
+    <section class="stats-section" id="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item" id="stat1"><div class="stat-number" data-target="50">0</div><div class="stat-label">Active Scripts</div></div>
+                <div class="stat-item" id="stat2"><div class="stat-number" data-target="1000">0</div><div class="stat-label">Downloads</div></div>
+                <div class="stat-item" id="stat3"><div class="stat-number" data-target="4">0</div><div class="stat-label">Games Supported</div></div>
+                <div class="stat-item" id="stat4"><div class="stat-number" data-target="100">0</div><div class="stat-label">Active Users</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose XmitScript Hub?</h2>
+            <p class="section-subtitle">Everything you need for the ultimate script experience</p>
+            <div class="features-grid">
+                <div class="feature-card" data-delay="0"><div class="feature-icon">🎮</div><h3>Multiple Games</h3><p>Support for Rivals, Arsenal, Overkill, and Universal scripts all in one place.</p></div>
+                <div class="feature-card" data-delay="100"><div class="feature-icon">🔒</div><h3>Secure Access</h3><p>Get your unique key through work.ink and access scripts safely and securely.</p></div>
+                <div class="feature-card" data-delay="200"><div class="feature-icon">⏰</div><h3>24-Hour Access</h3><p>Each key grants you 24 hours of access to generate loadstrings for your scripts.</p></div>
+                <div class="feature-card" data-delay="300"><div class="feature-icon">🔄</div><h3>Regular Updates</h3><p>Scripts are regularly updated and maintained by our community contributors.</p></div>
+                <div class="feature-card" data-delay="400"><div class="feature-icon">⚡</div><h3>Fast & Reliable</h3><p>Optimized loadstring generation with minimal latency and high availability.</p></div>
+                <div class="feature-card" data-delay="500"><div class="feature-icon">💬</div><h3>Community Driven</h3><p>Built by the community, for the community. Share and discover scripts together.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Get started in just 3 simple steps</p>
+            <div class="steps">
+                <div class="step" data-delay="0"><div class="step-number">1</div><h3>Get Your Key</h3><p>Visit work.ink to get your unique access key for XmitScript Hub.</p></div>
+                <div class="step" data-delay="200"><div class="step-number">2</div><h3>Browse & Choose</h3><p>Explore our library of scripts and find the perfect one for your game.</p></div>
+                <div class="step" data-delay="400"><div class="step-number">3</div><h3>Generate & Execute</h3><p>Redeem your key, generate a 24-hour loadstring, and execute it.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">What Our Users Say</h2>
+            <p class="section-subtitle">Join thousands of satisfied users</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-delay="0"><p class="testimonial-text">"XmitScript Hub has completely changed how I find and use scripts. The interface is clean and the loadstring system works perfectly!"</p><p class="testimonial-author">- RobloxDev23</p><p class="testimonial-role">⭐ 5/5 Stars</p></div>
+                <div class="testimonial-card" data-delay="200"><p class="testimonial-text">"The 24-hour key system is genius. I never have to worry about scripts getting leaked or outdated. Highly recommended!"</p><p class="testimonial-author">- ScriptMaster</p><p class="testimonial-role">⭐ 5/5 Stars</p></div>
+                <div class="testimonial-card" data-delay="400"><p class="testimonial-text">"Finally a script hub that actually works! The selection is amazing and the team keeps everything up to date."</p><p class="testimonial-author">- GamePro_X</p><p class="testimonial-role">⭐ 4.8/5 Stars</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Get Started?</h2>
+            <p>Join the XmitScript Hub community today and unlock the full potential of your Roblox experience.</p>
+            <div class="hero-buttons" style="justify-content:center;">
+                <a href="/hub" class="hero-btn primary">🎮 Browse Scripts Now</a>
+                <a href="/get-key" class="hero-btn secondary">🔑 Get Your Key</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-socials"><a href="#" style="color:#667eea;">🐦</a><a href="#" style="color:#667eea;">💬</a><a href="#" style="color:#667eea;">📺</a></div>
+            <p>© 2026 XmitScript Hub. Built with ❤️ for the Roblox community.</p>
+            <p style="margin-top:8px;font-size:12px;"><a href="/">Home</a> • <a href="/hub">Script Hub</a> • <a href="/get-key">Get Key</a> • <a href="/admin">Admin</a></p>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll',()=>{const n=document.getElementById('navbar');window.scrollY>50?n.classList.add('scrolled'):n.classList.remove('scrolled')});
+        const observerOptions={threshold:.1,rootMargin:'0px 0px -50px 0px'};
+        const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){const delay=parseInt(entry.target.dataset.delay)||0;setTimeout(()=>{entry.target.classList.add('visible')},delay)}})},observerOptions);
+        document.querySelectorAll('.feature-card, .step, .testimonial-card').forEach(el=>observer.observe(el));
+        const statObserver=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){const statItem=entry.target;const number=statItem.querySelector('.stat-number');const target=parseInt(number.dataset.target);if(!statItem.dataset.counted){statItem.dataset.counted='true';animateNumber(number,target)}}})},{threshold:.5});
+        document.querySelectorAll('.stat-item').forEach(el=>statObserver.observe(el));
+        function animateNumber(element,target){let current=0;const increment=Math.ceil(target/60);const timer=setInterval(()=>{current+=increment;if(current>=target){element.textContent=target+'+';clearInterval(timer)}else{element.textContent=current}},Math.floor(2000/60))}
+        document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){e.preventDefault();const target=document.querySelector(this.getAttribute('href'));if(target){target.scrollIntoView({behavior:'smooth',block:'start'})}})});
+        document.addEventListener('scroll',()=>{const hero=document.querySelector('.hero');const scrolled=window.pageYOffset;if(hero){hero.style.backgroundPositionY=scrolled*0.5+'px'}});
+    </script>
+</body>
+</html>
