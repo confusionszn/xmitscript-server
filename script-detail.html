@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XmitScript Hub - Script Details</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;min-height:100vh}.container{max-width:800px;margin:0 auto;padding:20px}::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:#0a0a0f}::-webkit-scrollbar-thumb{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:10px}.navbar{background:rgba(26,26,46,0.95);backdrop-filter:blur(10px);padding:16px 0;border-bottom:2px solid rgba(102,126,234,0.2);position:sticky;top:0;z-index:100;transition:all .3s}.navbar.scrolled{padding:12px 0;box-shadow:0 4px 30px rgba(0,0,0,0.5)}.navbar .container{display:flex;justify-content:space-between;align-items:center}.logo{font-size:24px;font-weight:700;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;animation:pulseGlow 2s infinite}@keyframes pulseGlow{0%,100%{filter:drop-shadow(0 0 10px rgba(102,126,234,0.3))}50%{filter:drop-shadow(0 0 20px rgba(102,126,234,0.6))}}.back-link{color:#a0a0b8;text-decoration:none;transition:all .3s}.back-link:hover{color:#fff;transform:translateX(-3px);display:inline-block}.script-detail{margin-top:30px;animation:fadeInUp .8s ease-out}@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}.script-header{margin-bottom:30px}.script-image-full{width:100%;max-height:400px;object-fit:cover;border-radius:12px;background:#2a2a4a;margin-bottom:20px;animation:fadeIn .8s ease-out}@keyframes fadeIn{from{opacity:0}to{opacity:1}}.script-title-full{font-size:32px;font-weight:700;margin-bottom:10px;color:#fff}.script-meta{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px}.category-badge{display:inline-block;padding:4px 16px;border-radius:20px;font-size:14px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;animation:pulseBadge 2s infinite}@keyframes pulseBadge{0%,100%{opacity:1}50%{opacity:0.8}}.category-rivals{background:#e74c3c;color:#fff}.category-arsenal{background:#3498db;color:#fff}.category-overkill{background:#2ecc71;color:#fff}.category-universal{background:#9b59b6;color:#fff}.script-stats-full{display:flex;gap:24px;color:#a0a0b8}.script-stats-full span{display:flex;align-items:center;gap:6px}.script-description-full{font-size:16px;line-height:1.8;color:#c0c0d0;margin:20px 0;padding:20px;background:rgba(26,26,46,0.6);backdrop-filter:blur(10px);border-radius:8px;border-left:3px solid #667eea;animation:fadeIn .8s ease-out .3s both}.btn-primary{padding:12px 32px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border:none;border-radius:8px;color:#fff;font-weight:600;font-size:16px;cursor:pointer;transition:all .3s;width:100%;position:relative;overflow:hidden}.btn-primary::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);transition:left .5s}.btn-primary:hover::before{left:100%}.btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 30px rgba(102,126,234,0.4)}.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}.modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);display:flex;align-items:center;justify-content:center;z-index:1000;backdrop-filter:blur(8px);animation:fadeIn .3s ease-out}.modal.hidden{display:none}.modal-content{background:#1a1a2e;padding:32px;border-radius:16px;max-width:500px;width:90%;max-height:90vh;overflow-y:auto;border:1px solid rgba(102,126,234,0.2);position:relative;animation:scaleIn .3s ease-out}@keyframes scaleIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}.modal-title{font-size:24px;margin-bottom:16px;color:#fff}.modal-close{position:absolute;top:16px;right:20px;font-size:28px;cursor:pointer;color:#a0a0b8;background:none;border:none;transition:all .3s}.modal-close:hover{color:#fff;transform:rotate(90deg)}.key-input{width:100%;padding:12px;background:#0a0a0f;border:2px solid #2a2a4a;border-radius:8px;color:#e0e0e0;font-size:16px;margin:16px 0;transition:border-color .3s}.key-input:focus{outline:none;border-color:#667eea}.loadstring-code{background:#0a0a0f;padding:16px;border-radius:8px;margin:16px 0;overflow-x:auto;border:1px solid #2a2a4a;animation:fadeIn .5s ease-out}.loadstring-code pre{font-size:13px;color:#a8d8ea;white-space:pre-wrap;word-wrap:break-word;font-family:'Courier New',monospace}.expiry-info{color:#f39c12;font-size:14px;margin-top:12px;text-align:center;animation:pulse 2s infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.6}}.error-message{color:#e74c3c;font-size:14px;margin-top:12px;padding:12px;background:rgba(231,76,60,0.1);border-radius:8px;border:1px solid rgba(231,76,60,0.2);animation:shake .5s ease-out}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}.success-message{color:#2ecc71;font-size:14px;margin-top:12px;padding:12px;background:rgba(46,204,113,0.1);border-radius:8px;border:1px solid rgba(46,204,113,0.2);animation:fadeIn .5s ease-out}.btn-secondary{padding:10px 24px;background:#2a2a4a;border:2px solid #3a3a5a;border-radius:8px;color:#e0e0e0;font-weight:600;cursor:pointer;transition:all .3s;width:100%;margin-top:8px}.btn-secondary:hover{background:#3a3a5a;transform:translateY(-2px)}.loading{text-align:center;padding:40px;color:#a0a0b8;animation:pulse 1.5s ease-in-out infinite}.footer{text-align:center;padding:30px 0;margin-top:40px;border-top:1px solid rgba(102,126,234,0.1);color:#6a6a82;font-size:14px}.footer a{color:#667eea;text-decoration:none;transition:color .3s}.footer a:hover{color:#8a9cf5}@media(max-width:768px){.navbar .container{flex-direction:column;gap:12px}.script-title-full{font-size:24px}.modal-content{padding:24px}}
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="/" class="logo">⚡ XmitScript Hub</a>
+            <a href="/hub" class="back-link">← Back to Hub</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div id="script-detail" class="script-detail">
+            <div class="loading">Loading script details...</div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 XmitScript Hub. Built with ❤️ for the Roblox community.</p>
+        </div>
+    </footer>
+
+    <div id="key-modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close" id="close-modal">&times;</button>
+            <h2 class="modal-title">🔑 Redeem Access Key</h2>
+            <p style="color:#a0a0b8;margin-bottom:16px;">Enter your work.ink key to access this script. <a href="/get-key" style="color:#667eea;text-decoration:none;">Don't have a key? Get one here</a></p>
+            <input type="text" id="key-input" placeholder="Enter your work.ink key" class="key-input">
+            <button id="redeem-key-btn" class="btn-primary">Redeem Key</button>
+            <div id="key-message"></div>
+        </div>
+    </div>
+
+    <div id="loadstring-modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close" id="close-loadstring-modal">&times;</button>
+            <h2 class="modal-title">⚡ Generate 24hr Loadstring</h2>
+            <div id="loadstring-result">
+                <p style="color:#a0a0b8;">Your loadstring has been generated!</p>
+                <div class="loadstring-code"><pre id="loadstring-code-display"></pre></div>
+                <button id="copy-loadstring-btn" class="btn-secondary">📋 Copy Loadstring</button>
+                <p class="expiry-info">⏰ Expires in 24 hours</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'https://xmithub-api.onrender.com';
+        window.addEventListener('scroll',()=>{const n=document.getElementById('navbar');window.scrollY>50?n.classList.add('scrolled'):n.classList.remove('scrolled')});
+
+        const scriptId = window.location.pathname.split('/').pop();
+        let scriptData = null, keyToken = null;
+
+        async function loadScriptDetails() {
+            const container = document.getElementById('script-detail');
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/scripts/${scriptId}`);
+                if (!response.ok) throw new Error('Script not found');
+                scriptData = await response.json();
+                container.innerHTML = `
+                    <div class="script-header">
+                        ${scriptData.image_url ? `<img src="${scriptData.image_url}" alt="${scriptData.title}" class="script-image-full">` : ''}
+                        <h1 class="script-title-full">${scriptData.title}</h1>
+                        <div class="script-meta">
+                            <span class="category-badge category-${scriptData.category}">${scriptData.category}</span>
+                            <div class="script-stats-full">
+                                <span>❤️ ${scriptData.display_likes || 0}</span>
+                                <span>⬇️ ${scriptData.display_downloads || 0}</span>
+                            </div>
+                        </div>
+                        <div class="script-description-full">${scriptData.description || 'No description available.'}</div>
+                    </div>
+                    <button id="generate-btn" class="btn-primary">🔑 Generate 24hr Loadstring</button>
+                `;
+                document.getElementById('generate-btn').addEventListener('click', () => {
+                    document.getElementById('key-modal').classList.remove('hidden');
+                });
+            } catch (error) {
+                container.innerHTML = `<div style="text-align:center;padding:60px;color:#a0a0b8;"><h2>Script not found</h2><p style="margin-top:12px;">${error.message}</p><a href="/hub" style="color:#667eea;text-decoration:none;display:inline-block;margin-top:16px;">← Back to Hub</a></div>`;
+            }
+        }
+
+        document.getElementById('close-modal').addEventListener('click', () => { document.getElementById('key-modal').classList.add('hidden'); document.getElementById('key-message').innerHTML = ''; });
+        document.getElementById('close-loadstring-modal').addEventListener('click', () => { document.getElementById('loadstring-modal').classList.add('hidden'); });
+        document.getElementById('key-modal').addEventListener('click', (e) => { if (e.target === e.currentTarget) { e.target.classList.add('hidden'); document.getElementById('key-message').innerHTML = ''; } });
+        document.getElementById('loadstring-modal').addEventListener('click', (e) => { if (e.target === e.currentTarget) e.target.classList.add('hidden'); });
+
+        document.getElementById('redeem-key-btn').addEventListener('click', async () => {
+            const keyInput = document.getElementById('key-input');
+            const messageDiv = document.getElementById('key-message');
+            const key = keyInput.value.trim();
+            if (!key) { messageDiv.innerHTML = '<div class="error-message">Please enter your work.ink key</div>'; return; }
+            messageDiv.innerHTML = '<div style="color:#a0a0b8;">Verifying key...</div>';
+            document.getElementById('redeem-key-btn').disabled = true;
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/redeem-key`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ workink_key: key, script_id: scriptId })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    keyToken = data.key_token;
+                    messageDiv.innerHTML = '<div class="success-message">✅ Key verified! Generating loadstring...</div>';
+                    await generateLoadstring();
+                } else {
+                    messageDiv.innerHTML = `<div class="error-message">❌ ${data.error || 'Invalid key'}</div>`;
+                    document.getElementById('redeem-key-btn').disabled = false;
+                }
+            } catch (error) {
+                messageDiv.innerHTML = '<div class="error-message">❌ Error verifying key</div>';
+                document.getElementById('redeem-key-btn').disabled = false;
+            }
+        });
+
+        async function generateLoadstring() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/generate-loadstring`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ script_id: scriptId, key_token: keyToken })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    document.getElementById('key-modal').classList.add('hidden');
+                    document.getElementById('key-message').innerHTML = '';
+                    document.getElementById('key-input').value = '';
+                    document.getElementById('loadstring-code-display').textContent = data.loadstring_code;
+                    document.getElementById('loadstring-modal').classList.remove('hidden');
+                    const generateBtn = document.getElementById('generate-btn');
+                    if (generateBtn) {
+                        generateBtn.textContent = '✅ Loadstring Generated!';
+                        generateBtn.disabled = true;
+                        setTimeout(() => { generateBtn.textContent = '🔑 Generate 24hr Loadstring'; generateBtn.disabled = false; }, 5000);
+                    }
+                } else {
+                    alert('Error: ' + (data.error || 'Unknown error'));
+                }
+            } catch (error) {
+                alert('Error generating loadstring');
+            }
+        }
+
+        document.getElementById('copy-loadstring-btn').addEventListener('click', () => {
+            const code = document.getElementById('loadstring-code-display').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.getElementById('copy-loadstring-btn');
+                btn.textContent = '✅ Copied!';
+                setTimeout(() => { btn.textContent = '📋 Copy Loadstring'; }, 2000);
+            }).catch(() => {
+                const textarea = document.createElement('textarea');
+                textarea.value = code;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                const btn = document.getElementById('copy-loadstring-btn');
+                btn.textContent = '✅ Copied!';
+                setTimeout(() => { btn.textContent = '📋 Copy Loadstring'; }, 2000);
+            });
+        });
+
+        loadScriptDetails();
+    </script>
+</body>
+</html>
