@@ -1,16 +1,23 @@
 {
-  "name": "xmit-script",
+  "name": "xmitscript-app",
   "version": "1.0.0",
-  "description": "XmitScript application",
-  "main": "src/better-sqlite3.ts", 
+  "description": "Electron app with better-sqlite3",
+  "main": "dist/main.js",
   "scripts": {
-    "start": "electron .",
-    "build": "electron-builder"
-  },
-  "devDependencies": {
-    "electron": "41.7.1"
+    "build": "tsc",
+    "start": "npm run build && electron .",
+    "start:prod": "node dist/server.js",
+    "rebuild": "electron-rebuild -f -w better-sqlite3"
   },
   "dependencies": {
-    "better-sqlite3": "^12.10.0"
+    "better-sqlite3": "^12.10.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^22.0.0",
+    "electron": "41.7.1",
+    "electron-rebuild": "^3.2.9",
+    "typescript": "^5.5.4"
   }
 }
