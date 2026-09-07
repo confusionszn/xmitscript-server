@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XmitScript Hub - Admin Panel</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;min-height:100vh}.container{max-width:1200px;margin:0 auto;padding:20px}::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:#0a0a0f}::-webkit-scrollbar-thumb{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:10px}.navbar{background:rgba(26,26,46,0.95);backdrop-filter:blur(10px);padding:16px 0;border-bottom:2px solid rgba(102,126,234,0.2);position:sticky;top:0;z-index:100;transition:all .3s}.navbar.scrolled{padding:12px 0;box-shadow:0 4px 30px rgba(0,0,0,0.5)}.navbar .container{display:flex;justify-content:space-between;align-items:center}.logo{font-size:24px;font-weight:700;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:pulseGlow 2s infinite}@keyframes pulseGlow{0%,100%{filter:drop-shadow(0 0 10px rgba(102,126,234,0.3))}50%{filter:drop-shadow(0 0 20px rgba(102,126,234,0.6))}}.nav-links{display:flex;gap:16px;align-items:center}#admin-username{color:#a0a0b8}.btn-secondary{padding:8px 20px;background:#2a2a4a;border:2px solid #3a3a5a;border-radius:8px;color:#e0e0e0;font-weight:600;cursor:pointer;transition:all .3s}.btn-secondary:hover{background:#3a3a5a;transform:translateY(-2px)}.login-container{max-width:400px;margin:60px auto;text-align:center;animation:fadeInUp .8s ease-out}@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}.login-container h2{margin-bottom:24px;color:#fff}.form-input{width:100%;padding:12px;background:#0a0a0f;border:2px solid #2a2a4a;border-radius:8px;color:#e0e0e0;font-size:16px;margin-bottom:12px;transition:border-color .3s}.form-input:focus{outline:none;border-color:#667eea}.btn-primary{padding:12px 32px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border:none;border-radius:8px;color:#fff;font-weight:600;font-size:16px;cursor:pointer;transition:all .3s;width:100%;position:relative;overflow:hidden}.btn-primary::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);transition:left .5s}.btn-primary:hover::before{left:100%}.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(102,126,234,0.4)}.error-message{color:#e74c3c;font-size:14px;margin-top:12px;animation:shake .5s ease-out}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}.success-message{color:#2ecc71;font-size:14px;margin-top:12px;animation:fadeIn .5s ease-out}@keyframes fadeIn{from{opacity:0}to{opacity:1}}.admin-header{display:flex;justify-content:space-between;align-items:center;margin:30px 0 20px;animation:fadeInUp .8s ease-out}.admin-header h2{color:#fff}#script-form-container{background:rgba(26,26,46,0.8);backdrop-filter:blur(10px);padding:24px;border-radius:12px;border:1px solid rgba(102,126,234,0.2);margin-bottom:30px;animation:fadeInUp .5s ease-out}#script-form-container h3{color:#fff;margin-bottom:16px}.form-group{margin-bottom:16px}.form-group label{display:block;margin-bottom:6px;color:#a0a0b8;font-size:14px;font-weight:600}.form-group textarea{resize:vertical;font-family:'Courier New',monospace}.form-actions{display:flex;gap:12px;margin-top:16px}.form-actions .btn-primary{width:auto}.btn-danger{padding:8px 16px;background:#e74c3c;border:none;border-radius:6px;color:#fff;cursor:pointer;font-weight:600;transition:all .3s}.btn-danger:hover{background:#c0392b;transform:scale(1.05)}#scripts-table-container{overflow-x:auto;animation:fadeInUp .8s ease-out .3s both}.scripts-table{width:100%;border-collapse:collapse;background:rgba(26,26,46,0.8);backdrop-filter:blur(10px);border-radius:12px;overflow:hidden}.scripts-table th{background:#2a2a4a;color:#a0a0b8;padding:12px;text-align:left;font-weight:600;font-size:14px}.scripts-table td{padding:12px;border-bottom:1px solid rgba(42,42,74,0.5);color:#e0e0e0}.scripts-table tr{transition:background .3s}.scripts-table tr:hover{background:rgba(102,126,234,0.05)}.scripts-table .actions{display:flex;gap:8px}.scripts-table .btn-small{padding:4px 12px;border:none;border-radius:4px;cursor:pointer;font-size:12px;font-weight:600;transition:all .3s}.btn-edit{background:#3498db;color:#fff}.btn-edit:hover{background:#2980b9;transform:scale(1.05)}.btn-delete{background:#e74c3c;color:#fff}.btn-delete:hover{background:#c0392b;transform:scale(1.05)}.loading{text-align:center;padding:40px;color:#a0a0b8;animation:pulse 1.5s ease-in-out infinite}@keyframes pulse{0%,100%{opacity:0.6}50%{opacity:1}}.footer{text-align:center;padding:30px 0;margin-top:40px;border-top:1px solid rgba(102,126,234,0.1);color:#6a6a82;font-size:14px}.footer a{color:#667eea;text-decoration:none;transition:color .3s}.footer a:hover{color:#8a9cf5}@media(max-width:768px){.navbar .container{flex-direction:column;gap:12px}.admin-header{flex-direction:column;gap:12px;align-items:stretch}.form-actions{flex-direction:column}.scripts-table{font-size:14px}.scripts-table th,.scripts-table td{padding:8px}}
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="logo">⚡ Admin Panel</div>
+            <div class="nav-links">
+                <span id="admin-username"></span>
+                <button id="logout-btn" class="btn-secondary" style="display:none;">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div id="login-form" class="login-container">
+            <h2>🔐 Admin Login</h2>
+            <input type="text" id="admin-username-input" placeholder="Username" class="form-input">
+            <input type="password" id="admin-password-input" placeholder="Password" class="form-input">
+            <button id="login-btn" class="btn-primary">Login</button>
+            <div id="login-message"></div>
+        </div>
+
+        <div id="admin-dashboard" style="display:none;">
+            <div class="admin-header">
+                <h2>📚 Manage Scripts</h2>
+                <button id="show-add-script" class="btn-primary">+ Add New Script</button>
+            </div>
+
+            <div id="script-form-container" style="display:none;">
+                <h3 id="form-title">Add New Script</h3>
+                <form id="script-form">
+                    <input type="hidden" id="script-id">
+                    <div class="form-group"><label>Title *</label><input type="text" id="script-title" required class="form-input"></div>
+                    <div class="form-group">
+                        <label>Category *</label>
+                        <select id="script-category" required class="form-input">
+                            <option value="rivals">Rivals</option>
+                            <option value="arsenal">Arsenal</option>
+                            <option value="overkill">Overkill</option>
+                            <option value="universal">Universal</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Description</label><textarea id="script-description" class="form-input" rows="3"></textarea></div>
+                    <div class="form-group"><label>Image URL</label><input type="url" id="script-image" class="form-input" placeholder="https://example.com/image.png"></div>
+                    <div class="form-group"><label>Actual Loadstring *</label><textarea id="script-loadstring" required class="form-input" rows="5"></textarea></div>
+                    <div class="form-group"><label>Display Likes</label><input type="number" id="script-likes" value="0" class="form-input"></div>
+                    <div class="form-group"><label>Display Downloads</label><input type="number" id="script-downloads" value="0" class="form-input"></div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">💾 Save Script</button>
+                        <button type="button" id="cancel-script-form" class="btn-secondary">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="scripts-list">
+                <h3 style="color:#fff;margin-bottom:16px;">Your Scripts</h3>
+                <div id="scripts-table-container"><div class="loading">Loading scripts...</div></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 XmitScript Hub. Built with ❤️ for the Roblox community.</p>
+            <p style="margin-top:8px;font-size:12px;"><a href="/">Home</a> • <a href="/hub">Script Hub</a> • <a href="/get-key">Get Key</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== API Configuration =====
+        const API_BASE_URL = 'https://xmithub-api.onrender.com';
+
+        window.addEventListener('scroll',()=>{const n=document.getElementById('navbar');window.scrollY>50?n.classList.add('scrolled'):n.classList.remove('scrolled')});
+
+        let token=null, editingScriptId=null;
+
+        function checkAuth(){token=localStorage.getItem('adminToken');token?showDashboard():showLogin()}
+        function showLogin(){document.getElementById('login-form').style.display='block';document.getElementById('admin-dashboard').style.display='none';document.getElementById('logout-btn').style.display='none';document.getElementById('admin-username').textContent=''}
+        function showDashboard(){document.getElementById('login-form').style.display='none';document.getElementById('admin-dashboard').style.display='block';document.getElementById('logout-btn').style.display='inline-block';document.getElementById('admin-username').textContent='👤 Admin';loadScripts()}
+
+        document.getElementById('login-btn').addEventListener('click',async()=>{
+            const username=document.getElementById('admin-username-input').value;
+            const password=document.getElementById('admin-password-input').value;
+            const messageDiv=document.getElementById('login-message');
+            if(!username||!password){messageDiv.innerHTML='<div class="error-message">Please enter username and password</div>';return}
+            messageDiv.innerHTML='<div style="color:#a0a0b8;">Logging in...</div>';
+            try{
+                const response=await fetch(`${API_BASE_URL}/api/admin/login`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,password})});
+                const data=await response.json();
+                if(response.ok){token=data.token;localStorage.setItem('adminToken',token);messageDiv.innerHTML='<div class="success-message">✅ Login successful!</div>';setTimeout(()=>{showDashboard();messageDiv.innerHTML=''},500)}
+                else{messageDiv.innerHTML=`<div class="error-message">❌ ${data.error||'Login failed'}</div>`}
+            }catch(error){messageDiv.innerHTML='<div class="error-message">❌ Error connecting to server</div>'}
+        });
+
+        document.getElementById('logout-btn').addEventListener('click',()=>{localStorage.removeItem('adminToken');token=null;showLogin()});
+
+        async function loadScripts(){
+            const container=document.getElementById('scripts-table-container');
+            container.innerHTML='<div class="loading">Loading scripts...</div>';
+            try{
+                const response=await fetch(`${API_BASE_URL}/api/admin/scripts`,{headers:{'Authorization':`Bearer ${token}`}});
+                if(!response.ok){if(response.status===401){localStorage.removeItem('adminToken');showLogin();return}throw new Error('Failed to load scripts')}
+                const scripts=await response.json();
+                if(scripts.length===0){container.innerHTML='<div style="text-align:center;padding:40px;color:#a0a0b8;"><p>No scripts yet. Click "Add New Script" to get started!</p></div>';return}
+                container.innerHTML=`<table class="scripts-table"><thead><tr><th>ID</th><th>Title</th><th>Category</th><th>Likes</th><th>Downloads</th><th>Actions</th></tr></thead><tbody>${scripts.map(s=>`<tr><td>#${s.id}</td><td><strong>${s.title}</strong></td><td style="text-transform:capitalize;">${s.category}</td><td>${s.display_likes||0}</td><td>${s.display_downloads||0}</td><td><div class="actions"><button class="btn-small btn-edit" onclick="editScript(${s.id})">✏️ Edit</button><button class="btn-small btn-delete" onclick="deleteScript(${s.id})">🗑️ Delete</button></div></td></tr>`).join('')}</tbody></table>`
+            }catch(error){container.innerHTML=`<div style="text-align:center;padding:40px;color:#e74c3c;"><p>❌ Error loading scripts</p><p style="color:#a0a0b8;font-size:14px;margin-top:8px;">${error.message}</p></div>`}
+        }
+
+        document.getElementById('show-add-script').addEventListener('click',()=>{editingScriptId=null;document.getElementById('form-title').textContent='Add New Script';document.getElementById('script-form').reset();document.getElementById('script-id').value='';document.getElementById('script-likes').value=0;document.getElementById('script-downloads').value=0;document.getElementById('script-form-container').style.display='block';document.getElementById('show-add-script').style.display='none'});
+        document.getElementById('cancel-script-form').addEventListener('click',()=>{document.getElementById('script-form-container').style.display='none';document.getElementById('show-add-script').style.display='inline-block';document.getElementById('script-form').reset()});
+
+        window.editScript=async(id)=>{try{const response=await fetch(`${API_BASE_URL}/api/admin/scripts`,{headers:{'Authorization':`Bearer ${token}`}});const scripts=await response.json();const script=scripts.find(s=>s.id===id);if(script){editingScriptId=id;document.getElementById('form-title').textContent='Edit Script';document.getElementById('script-id').value=script.id;document.getElementById('script-title').value=script.title;document.getElementById('script-category').value=script.category;document.getElementById('script-description').value=script.description||'';document.getElementById('script-image').value=script.image_url||'';document.getElementById('script-loadstring').value=script.actual_loadstring;document.getElementById('script-likes').value=script.display_likes||0;document.getElementById('script-downloads').value=script.display_downloads||0;document.getElementById('script-form-container').style.display='block';document.getElementById('show-add-script').style.display='none'}}catch(error){alert('Error loading script for editing')}};
+
+        window.deleteScript=async(id)=>{if(!confirm('Are you sure?'))return;try{const response=await fetch(`${API_BASE_URL}/api/admin/scripts/${id}`,{method:'DELETE',headers:{'Authorization':`Bearer ${token}`}});if(response.ok){alert('✅ Script deleted');loadScripts()}else{const data=await response.json();alert('❌ Error: '+data.error)}}catch(error){alert('❌ Error deleting script')}};
+
+        document.getElementById('script-form').addEventListener('submit',async(e)=>{e.preventDefault();const id=document.getElementById('script-id').value;const data={title:document.getElementById('script-title').value,category:document.getElementById('script-category').value,description:document.getElementById('script-description').value,image_url:document.getElementById('script-image').value,actual_loadstring:document.getElementById('script-loadstring').value,display_likes:parseInt(document.getElementById('script-likes').value)||0,display_downloads:parseInt(document.getElementById('script-downloads').value)||0};const url=id?`${API_BASE_URL}/api/admin/scripts/${id}`:`${API_BASE_URL}/api/admin/scripts`;const method=id?'PUT':'POST';try{const response=await fetch(url,{method,headers:{'Content-Type':'application/json','Authorization':`Bearer ${token}`},body:JSON.stringify(data)});if(response.ok){alert('✅ Script saved');document.getElementById('script-form-container').style.display='none';document.getElementById('show-add-script').style.display='inline-block';document.getElementById('script-form').reset();loadScripts()}else{const error=await response.json();alert('❌ Error: '+error.error)}}catch(error){alert('❌ Error saving script')}});
+
+        document.getElementById('admin-password-input').addEventListener('keypress',(e)=>{if(e.key==='Enter')document.getElementById('login-btn').click()});
+        checkAuth();
+    </script>
+</body>
+</html>
